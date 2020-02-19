@@ -1,4 +1,7 @@
 ﻿# Using Real Estate Data and Satellite Imagery to Identify Slums
+space for summary
+
+# Modeling
 
 ## Scraping Real Estate Data
 ### Utilizing Existing Slum Maps
@@ -8,3 +11,8 @@
 ### Processing Images for Classification
 ### Image Classification
 
+# Running Our Models
+
+## Image Classifier
+
+## Real Estate Data Classifier
