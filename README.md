@@ -14,5 +14,7 @@ space for summary
 # Running Our Models
 
 ## Image Classifier
-
+1. Place your images in satellite_models/place_images_here.
+2. Run image_preproccesor.py.
+3. Run image_classifier.py.
 ## Real Estate Data Classifier
