@@ -36,14 +36,6 @@ This project takes satellite imagery from Google Maps, public overlay images map
 
 For more details on the files within the directories, there is a `README.md` file within each subdirectory.
 
-* *[Final_Report.md](Final_Report.md)*
-
-  > A technical summary of the project. Includes the main text of the `README.md` files in the notebook directories.
-
-* *README.md*
-
-  > You're looking at it.
-
 * *[images](images)*
 
   > A directory for reference images belonging to this project.  
@@ -55,6 +47,14 @@ For more details on the files within the directories, there is a `README.md` fil
 * *[satellite_imagery](satellite_imagery)*
 
   > A directory for satellite image files, Jupyter Notebooks, and Python scripts supporting the image classifier for slum identification.
+
+* *[Final_Report.md](Final_Report.md)*
+
+  > A technical summary of the project. Includes the main text of the `README.md` files in the notebook directories.
+
+* *README.md*
+
+  > You're looking at it.
 
 ## 2.0 Project Outline
 The identification and mapping of slums, or mapping informal settlements, can be assisted by machine-learning models. Taking in historical and near-time online real estate data can assist persons by discovering the up-to-date bounds of a slum within the locality. The actions for the pre-classification workflow are independent:
