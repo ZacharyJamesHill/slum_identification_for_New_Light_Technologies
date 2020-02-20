@@ -44,7 +44,8 @@ predictions = model.predict(images)
 # In[12]:
 
 
-print(predictions)
+predictions = pd.DataFrame(predictions)
+predictions.to_csv('predictions.csv', index=False)
 
 
 # In[ ]:
