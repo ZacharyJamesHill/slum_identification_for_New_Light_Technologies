@@ -129,11 +129,12 @@ Data size is dependent on the overall availability of online Real Estate data to
 12. Rio de Janeiro slum map via [London School of Economics and Political Science](https://lsecities.net)
 
 
-### 3.3 Source Example 
+### 3.3 Source Example
 <img src="./images/zapimoveis-sample.jpg" alt="Sample listing from the zapmoveis (BR) page" height="369" width="684"/>
 
 ### 3.4 Data Dictionaries
 ZAPMOVEIS webscrape data
+
 | Column         | Data Type | Scraped from Site? | Desc                                                        | Notes                                                          |
 | -------------- | :-------: | :----------------: | ----------------------------------------------------------- | -------------------------------------------------------------- |
 | address        |    obj    |         Y          | Street and neighborhood in Rio de Janeiro.                  |                                                                |
@@ -152,6 +153,7 @@ ZAPMOVEIS webscrape data
 | usd_pmo        |   float   |         N          | Calculated USD per mo value from `r$_pmo` column.           | Converted from Brazilian real to USD at R$ 100 == USD 23.24.   |
 
 magicbricks webscrape data
+
 | Column            | Data Type | Scraped from Site? | Desc                                               | Notes                                                                        |
 | ----------------- | :-------: | :----------------: | -------------------------------------------------- | ---------------------------------------------------------------------------- |
 | price             |    obj    |         Y          | INR per month rent, formatted.                     | May include Lahk ("Lac") designation for proportion of 100_000 INR.          |
