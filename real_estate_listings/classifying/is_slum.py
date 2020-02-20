@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 from PIL import Image, ImageColor, ImageOps, ImageFilter
@@ -13,14 +13,7 @@ import pandas as pd
 from geopy.distance import geodesic, pi, EARTH_RADIUS, cos, sin
 
 
-# In[2]:
-
-
-# showing map names
-os.listdir('Slum Maps/')
-
-
-# In[3]:
+# In[25]:
 
 
 # making a list of map images and map arrays
@@ -44,14 +37,7 @@ for name in os.listdir('Slum Maps/grayscale'):
     maps[f"{name.split('_')[0]}_grayscale"] = image
 
 
-# In[4]:
-
-
-# displaying the Rio slum map
-maps['Rio de Janeiro.jpg_original']
-
-
-# In[5]:
+# In[6]:
 
 
 # defining a distance function
@@ -94,13 +80,7 @@ rio_x_factor = rio_x_dist_lat_long / rio_x_dist_coords
 rio_y_factor = -rio_y_dist_lat_long / rio_y_dist_coords
 
 
-# In[ ]:
-
-
-
-
-
-# In[6]:
+# In[7]:
 
 
 # defining a function to get lattitude and longitude prom pixel coordinates
@@ -116,18 +96,11 @@ def rio_get_lat_long(coord):
 
 
 
-rio_get_lat_long((739,261))
 
 # (556,304) (266, 744)
 
 
-# In[7]:
-
-
-maps['Mumbai.png_original']
-
-
-# In[8]:
+# In[9]:
 
 
 # top left
@@ -166,7 +139,7 @@ mumbai_x_factor = mumbai_x_dist_lat_long / mumbai_x_dist_coords
 mumbai_y_factor = -mumbai_y_dist_lat_long / mumbai_y_dist_coords
 
 
-# In[9]:
+# In[10]:
 
 
 def mumbai_get_lat_long(coord):
@@ -180,10 +153,7 @@ def mumbai_get_lat_long(coord):
     return (lat, long)
 
 
-mumbai_get_lat_long((1663, 5687))
-
-
-# In[10]:
+# In[11]:
 
 
 # top left
@@ -221,7 +191,7 @@ hyderabad_x_factor = hyderabad_x_dist_lat_long / hyderabad_x_dist_coords
 hyderabad_y_factor = -hyderabad_y_dist_lat_long / hyderabad_y_dist_coords
 
 
-# In[11]:
+# In[12]:
 
 
 def hyderabad_get_lat_long(coord):
@@ -235,7 +205,111 @@ def hyderabad_get_lat_long(coord):
     return (lat, long)
 
 
-# In[23]:
+# In[19]:
+
+
+# top left
+#  13°11'50.67"N
+#  80° 0'42.37"E
+# (13.19740833, 80.01166667)
+
+
+# bottom right
+#  12°47'6.59"N
+#  80°18'19.24"E
+# (12.78516389, 80.30527778)
+
+
+# lattitude and Longitude reference points
+chennai_origin_lat_long = (13.19740833, 80.01166667)
+chennai_edge_lat_long = (12.78516389, 80.30527778)
+# Pixel coordinate refrence points
+chennai_origin_coords = (0, 0)
+chennai_edge_coords = (1074, 745)
+
+# getting real world component and total distances between refrence points
+chennai_total_dist_lat_long = geodesic(chennai_origin_lat_long, chennai_edge_lat_long).kilometers
+chennai_y_dist_lat_long = geodesic(chennai_origin_lat_long, (chennai_edge_lat_long[0],chennai_origin_lat_long[1])).kilometers
+chennai_x_dist_lat_long = geodesic(chennai_origin_lat_long, (chennai_origin_lat_long[0], chennai_edge_lat_long[1])).kilometers
+
+# getting pixel coordinate component and total distances between refrence points
+chennai_total_dist_coords = distance(chennai_origin_coords,chennai_edge_coords)
+chennai_y_dist_coords = distance(chennai_origin_coords, (chennai_edge_coords[0], chennai_origin_coords[1]))
+chennai_x_dist_coords = distance(chennai_origin_coords, (chennai_origin_coords[0], chennai_edge_coords[1]))
+
+# getting conversion between x distance in pixels to km
+chennai_x_factor = chennai_x_dist_lat_long / chennai_x_dist_coords
+# getting conversion between y distance in pixels to km
+chennai_y_factor = -chennai_y_dist_lat_long / chennai_y_dist_coords
+
+
+# In[20]:
+
+
+def chennai_get_lat_long(coord):
+    
+    y = coord[1] * hyperbad_y_factor
+    x = coord[0] * hyperbad_x_factor
+    
+    lat  = chennai_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
+    long = chennai_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(chennai_origin_lat_long[0] * pi/180)
+
+    return (lat, long)
+
+
+# In[21]:
+
+
+# top left
+#   28°56'17.27"N
+#   76°45'57.52"E
+# (28.93813056, 76.76611111)
+
+
+# bottom right
+#   28°24'47.67"N
+#   77°35'14.60"E
+# (28.41324167, 77.58750000)
+
+
+# lattitude and Longitude reference points
+dehli_origin_lat_long = (28.93813056, 76.76611111)
+dehli_edge_lat_long = (28.41324167, 77.58750000)
+# Pixel coordinate refrence points
+dehli_origin_coords = (0, 0)
+dehli_edge_coords = (745, 1074)
+
+# getting real world component and total distances between refrence points
+dehli_total_dist_lat_long = geodesic(dehli_origin_lat_long, dehli_edge_lat_long).kilometers
+dehli_y_dist_lat_long = geodesic(dehli_origin_lat_long, (dehli_edge_lat_long[0],dehli_origin_lat_long[1])).kilometers
+dehli_x_dist_lat_long = geodesic(dehli_origin_lat_long, (dehli_origin_lat_long[0], dehli_edge_lat_long[1])).kilometers
+
+# getting pixel coordinate component and total distances between refrence points
+dehli_total_dist_coords = distance(dehli_origin_coords,dehli_edge_coords)
+dehli_y_dist_coords = distance(dehli_origin_coords, (dehli_edge_coords[0], dehli_origin_coords[1]))
+dehli_x_dist_coords = distance(dehli_origin_coords, (dehli_origin_coords[0], dehli_edge_coords[1]))
+
+# getting conversion between x distance in pixels to km
+dehli_x_factor = dehli_x_dist_lat_long / dehli_x_dist_coords
+# getting conversion between y distance in pixels to km
+dehli_y_factor = -dehli_y_dist_lat_long / dehli_y_dist_coords
+
+
+# In[22]:
+
+
+def dehli_get_lat_long(coord):
+    
+    y = coord[1] * hyperbad_y_factor
+    x = coord[0] * hyperbad_x_factor
+    
+    lat  = dehli_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
+    long = dehli_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(dehli_origin_lat_long[0] * pi/180)
+
+    return (lat, long)
+
+
+# In[24]:
 
 
 def get_pixel_coords(city, coord):
@@ -299,18 +373,52 @@ def get_pixel_coords(city, coord):
             y = hyderabad_edge_coords[0]-1
         
         return (x,y)
+    elif city == 'chennai':
+        
+        y = (coord[0] - chennai_origin_lat_long[0]) / (180 / pi) * EARTH_RADIUS 
+        x = (coord[1] -  chennai_origin_lat_long[1]) * cos(chennai_origin_lat_long[0] * pi/180) / (180 / pi) * EARTH_RADIUS
+        
+        x = int(np.round(x / chennai_x_factor))
+        y = int(np.round(y / chennai_y_factor))
+        
+        if x < 0:
+            x = 0
+        if y < 0:
+            y = 0
+        
+        
+        if x > chennai_edge_coords[1]-1:
+            x = chennai_edge_coords[1]-1
+        if y > chennai_edge_coords[0]-1:
+            y = chennai_edge_coords[0]-1
+        
+        return (x,y)
+    elif city == 'dehli':
+        
+        y = (coord[0] - dehli_origin_lat_long[0]) / (180 / pi) * EARTH_RADIUS 
+        x = (coord[1] -  dehli_origin_lat_long[1]) * cos(dehli_origin_lat_long[0] * pi/180) / (180 / pi) * EARTH_RADIUS
+        
+        x = int(np.round(x / dehli_x_factor))
+        y = int(np.round(y / dehli_y_factor))
+        
+        if x < 0:
+            x = 0
+        if y < 0:
+            y = 0
+        
+        
+        if x > dehli_edge_coords[1]-1:
+            x = dehli_edge_coords[1]-1
+        if y > dehli_edge_coords[0]-1:
+            y = dehli_edge_coords[0]-1
+        
+        return (x,y)
         
     else:
         print("Error Invalid City, Valid Cities are rio, mumbai")
 
 
-# In[13]:
-
-
-get_pixel_coords('hyderabad', (17.26456111, 78.65083333))
-
-
-# In[14]:
+# In[26]:
 
 
 def get_slum_val(city, coord):
@@ -336,39 +444,22 @@ def get_slum_val(city, coord):
             return 0
         else:
             return 1
+    elif city == 'chennai':
+        
+        if np.array(maps['chennai_grayscale'])[pixel_coords[1], pixel_coords[0]][0] == 255:
+            return 0
+        else:
+            return 1
+    elif city == 'dehli':
+        
+        if np.array(maps['delhi_grayscale'])[pixel_coords[1], pixel_coords[0]][0] == 255:
+            return 0
+        else:
+            return 1
 
 
-# In[15]:
+# In[ ]:
 
 
-[get_slum_val('rio',(-22.73094444, -43.83611111)),
- get_slum_val('mumbai', (19.00041953461369, 72.85954265683384)),
- get_slum_val('rio',(-22.87432500, -43.49666667)),
- get_slum_val('rio', (-22.94778856047526, -43.21671105721345)),
- get_slum_val('hyderabad', (17.26456111, 78.65083333))
-]
 
-
-# In[16]:
-
-
-get_slum_val('rio', (-23.17808056, -43.03277778))
-
-
-# In[25]:
-
-
-get_slum_val('hyderabad', (11.9249, 79.8304))
-
-
-# In[21]:
-
-
-hyderabad_edge_coords[1]-1, hyderabad_edge_coords[0]-1
-
-
-# In[17]:
-
-
-# scale pixel km to city map
 
