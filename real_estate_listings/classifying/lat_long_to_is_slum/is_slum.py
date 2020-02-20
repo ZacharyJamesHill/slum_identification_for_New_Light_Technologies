@@ -196,8 +196,8 @@ hyderabad_y_factor = -hyderabad_y_dist_lat_long / hyderabad_y_dist_coords
 
 def hyderabad_get_lat_long(coord):
     
-    y = coord[1] * hyperbad_y_factor
-    x = coord[0] * hyperbad_x_factor
+    y = coord[1] * hyderabad_y_factor
+    x = coord[0] * hyderabad_x_factor
     
     lat  = hyderabad_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
     long = hyderabad_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(hyderabad_origin_lat_long[0] * pi/180)
@@ -248,8 +248,8 @@ chennai_y_factor = -chennai_y_dist_lat_long / chennai_y_dist_coords
 
 def chennai_get_lat_long(coord):
     
-    y = coord[1] * hyperbad_y_factor
-    x = coord[0] * hyperbad_x_factor
+    y = coord[1] * chennai_y_factor
+    x = coord[0] * chennai_x_factor
     
     lat  = chennai_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
     long = chennai_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(chennai_origin_lat_long[0] * pi/180)
@@ -273,38 +273,38 @@ def chennai_get_lat_long(coord):
 
 
 # lattitude and Longitude reference points
-dehli_origin_lat_long = (28.93813056, 76.76611111)
-dehli_edge_lat_long = (28.41324167, 77.58750000)
+delhi_origin_lat_long = (28.93813056, 76.76611111)
+delhi_edge_lat_long = (28.41324167, 77.58750000)
 # Pixel coordinate refrence points
-dehli_origin_coords = (0, 0)
-dehli_edge_coords = (745, 1074)
+delhi_origin_coords = (0, 0)
+delhi_edge_coords = (745, 1074)
 
 # getting real world component and total distances between refrence points
-dehli_total_dist_lat_long = geodesic(dehli_origin_lat_long, dehli_edge_lat_long).kilometers
-dehli_y_dist_lat_long = geodesic(dehli_origin_lat_long, (dehli_edge_lat_long[0],dehli_origin_lat_long[1])).kilometers
-dehli_x_dist_lat_long = geodesic(dehli_origin_lat_long, (dehli_origin_lat_long[0], dehli_edge_lat_long[1])).kilometers
+delhi_total_dist_lat_long = geodesic(delhi_origin_lat_long, delhi_edge_lat_long).kilometers
+delhi_y_dist_lat_long = geodesic(delhi_origin_lat_long, (delhi_edge_lat_long[0],delhi_origin_lat_long[1])).kilometers
+delhi_x_dist_lat_long = geodesic(delhi_origin_lat_long, (delhi_origin_lat_long[0], delhi_edge_lat_long[1])).kilometers
 
 # getting pixel coordinate component and total distances between refrence points
-dehli_total_dist_coords = distance(dehli_origin_coords,dehli_edge_coords)
-dehli_y_dist_coords = distance(dehli_origin_coords, (dehli_edge_coords[0], dehli_origin_coords[1]))
-dehli_x_dist_coords = distance(dehli_origin_coords, (dehli_origin_coords[0], dehli_edge_coords[1]))
+delhi_total_dist_coords = distance(delhi_origin_coords,delhi_edge_coords)
+delhi_y_dist_coords = distance(delhi_origin_coords, (delhi_edge_coords[0], delhi_origin_coords[1]))
+delhi_x_dist_coords = distance(delhi_origin_coords, (delhi_origin_coords[0], delhi_edge_coords[1]))
 
 # getting conversion between x distance in pixels to km
-dehli_x_factor = dehli_x_dist_lat_long / dehli_x_dist_coords
+delhi_x_factor = delhi_x_dist_lat_long / delhi_x_dist_coords
 # getting conversion between y distance in pixels to km
-dehli_y_factor = -dehli_y_dist_lat_long / dehli_y_dist_coords
+delhi_y_factor = -delhi_y_dist_lat_long / delhi_y_dist_coords
 
 
 # In[22]:
 
 
-def dehli_get_lat_long(coord):
+def delhi_get_lat_long(coord):
     
-    y = coord[1] * hyperbad_y_factor
-    x = coord[0] * hyperbad_x_factor
+    y = coord[1] * delhi_y_factor
+    x = coord[0] * delhi_x_factor
     
-    lat  = dehli_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
-    long = dehli_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(dehli_origin_lat_long[0] * pi/180)
+    lat  = delhi_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
+    long = delhi_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(delhi_origin_lat_long[0] * pi/180)
 
     return (lat, long)
 
@@ -393,13 +393,13 @@ def get_pixel_coords(city, coord):
             y = chennai_edge_coords[0]-1
         
         return (x,y)
-    elif city == 'dehli':
+    elif city == 'delhi':
         
-        y = (coord[0] - dehli_origin_lat_long[0]) / (180 / pi) * EARTH_RADIUS 
-        x = (coord[1] -  dehli_origin_lat_long[1]) * cos(dehli_origin_lat_long[0] * pi/180) / (180 / pi) * EARTH_RADIUS
+        y = (coord[0] - delhi_origin_lat_long[0]) / (180 / pi) * EARTH_RADIUS 
+        x = (coord[1] -  delhi_origin_lat_long[1]) * cos(delhi_origin_lat_long[0] * pi/180) / (180 / pi) * EARTH_RADIUS
         
-        x = int(np.round(x / dehli_x_factor))
-        y = int(np.round(y / dehli_y_factor))
+        x = int(np.round(x / delhi_x_factor))
+        y = int(np.round(y / delhi_y_factor))
         
         if x < 0:
             x = 0
@@ -407,15 +407,15 @@ def get_pixel_coords(city, coord):
             y = 0
         
         
-        if x > dehli_edge_coords[1]-1:
-            x = dehli_edge_coords[1]-1
-        if y > dehli_edge_coords[0]-1:
-            y = dehli_edge_coords[0]-1
+        if x > delhi_edge_coords[1]-1:
+            x = delhi_edge_coords[1]-1
+        if y > delhi_edge_coords[0]-1:
+            y = delhi_edge_coords[0]-1
         
         return (x,y)
         
     else:
-        print("Error Invalid City, Valid Cities are rio, mumbai")
+        print("Error Invalid City, Valid Cities are rio, mumbai, hyderabad, chennai, delhi")
 
 
 # In[26]:
@@ -449,7 +449,6 @@ def get_slum_val(city, coord):
         if np.array(maps['chennai_grayscale'])[pixel_coords[1], pixel_coords[0]][0] == 255:
             return 0
         else:
-            return 1
     elif city == 'dehli':
         
         if np.array(maps['delhi_grayscale'])[pixel_coords[1], pixel_coords[0]][0] == 255:
