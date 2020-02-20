@@ -7,6 +7,8 @@ space for summary
 
 ### Scraping Real Estate Data
 
+### Example Real Estate Listing
+![](https://git.generalassemb.ly/ZacharyJamesHill/slum_identification_for_New_Light_Technologies/blob/master/images/zapimoveis-sample.jpg)
 ### Utilizing Existing Slum Maps
 Most publically available maps of slums do not include coordinate data. To provide a classification on our real estate data we had to translate the pixel coordinates to latitude and longitude. This was accomplished by taking two reference points at the origin of the map's coordinates and the edge of the map's coordinates. The reference points were used to provide conversion factors between pixel distance and real world distance. A final function was devised using the conversion factorts that takes in latitude and longitude and outputs a boolean representing whether or not the location is in a slum.
 ### Example Slum Map
