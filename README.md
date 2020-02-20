@@ -17,9 +17,9 @@ Most publically available maps of slums do not include coordinate data. To provi
 ### Choosing Which Satellite Imagery Service to Use
 Many satellite imagery api's were considered for the data aquisition, however high resolution satelite data is not available for free on these services. Ultimately screenshots of google earth were used.
 ### Labeling Satellite Data
-The slum maps that were used in the real estate data were also used to guide image labelling.
+The slum maps that were used in the real estate data were also used to guide image labelling. Labelling was done manually ans simultaneous to data collection.
 ### Processing Images for Classification
-Images were scaled and then split into 400 equal parts.
+Images were scaled to uniform size and then split into 400 equal parts.
 ### Image Classification
 Images were classifed using keras's mobelnet v2 implementation.
 ### Example Non Slum Image
