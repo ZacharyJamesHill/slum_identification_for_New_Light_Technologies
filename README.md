@@ -25,7 +25,12 @@ This project takes satellite imagery from Google Maps, public overlay images map
 ## 1.0 Directory Structure
 
 ```
-TKTKTK
+.
+├── images
+├── real_estate_listings
+├── satellite_imagery
+├── Final_Report.md
+└── README.md
 ```
 ## Directory Outline
 
@@ -128,6 +133,7 @@ Data size is dependent on the overall availability of online Real Estate data to
 <img src="./images/zapimoveis-sample.jpg" alt="Sample listing from the zapmoveis (BR) page" height="369" width="684"/>
 
 ### 3.4 Data Dictionaries
+ZAPMOVEIS webscrape data
 | Column         | Data Type | Scraped from Site? | Desc                                                        | Notes                                                          |
 | -------------- | :-------: | :----------------: | ----------------------------------------------------------- | -------------------------------------------------------------- |
 | address        |    obj    |         Y          | Street and neighborhood in Rio de Janeiro.                  |                                                                |
@@ -145,6 +151,7 @@ Data size is dependent on the overall availability of online Real Estate data to
 | r$_pmo         |   float   |         N          | Brazilian reals per mo value extracted from `price` column. |                                                                |
 | usd_pmo        |   float   |         N          | Calculated USD per mo value from `r$_pmo` column.           | Converted from Brazilian real to USD at R$ 100 == USD 23.24.   |
 
+magicbricks webscrape data
 | Column            | Data Type | Scraped from Site? | Desc                                               | Notes                                                                        |
 | ----------------- | :-------: | :----------------: | -------------------------------------------------- | ---------------------------------------------------------------------------- |
 | price             |    obj    |         Y          | INR per month rent, formatted.                     | May include Lahk ("Lac") designation for proportion of 100_000 INR.          |
@@ -167,7 +174,7 @@ Data size is dependent on the overall availability of online Real Estate data to
 | usd_pmo           |   float   |         N          | Calculated USD per mo value from `inr_pmo` column. | Converted from INR to USD at INR 100 == USD 1.4022.                          |
 
 ## 4.0 Images
-<img src="./images/slum_map_demo_opt.png" alt="Mumbai's slums map" height="875" width="1325"/>
+<img src="./images/slum_map_demo_opt.png" alt="Mumbai's slums map" height="875" width="1329"/>
 
 ## 5.0 Conclusion
 
