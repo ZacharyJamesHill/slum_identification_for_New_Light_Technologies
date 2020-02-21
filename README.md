@@ -79,35 +79,11 @@ Slum classification:
 Model:
 - Create or iterate upon the Jupter Notebook with classifier model. Create and assess slum predictions for the RE data.
 
-Example output from `real_estate_listings/modeling/X-city modeling 3 cities`:
-```
-train: rio | test: rio
-train: 0.9568 | test: 0.9539
+**Training the model on four cities and testing on the fifth:**<br><br>
+<img src="./images/prj5_4citytrain_1citytest_scores.png" alt="Test scores from model for selected cities" height="184" width="466"/>
 
-train: rio | test: mumbai
-train: 0.9566 | test: 0.9502
-
-train: rio | test: hyderabad
-train: 0.9566 | test: 0.9666
-
-train: mumbai | test: rio
-train: 0.9647 | test: 0.9304
-
-train: mumbai | test: mumbai
-train: 0.9651 | test: 0.9589
-
-train: mumbai | test: hyderabad
-train: 0.9647 | test: 0.9512
-
-train: hyderabad | test: rio
-train: 0.9704 | test: 0.9559
-
-train: hyderabad | test: mumbai
-train: 0.9704 | test: 0.9623
-
-train: hyderabad | test: hyderabad
-train: 0.9683 | test: 0.9769
-```
+**[Rent index factor](https://www.numbeo.com/cost-of-living/rankings_current.jsp) by selected city:**<br><br>
+<img src="./images/prj5_5city_rent_indexes.png" alt="Rent index factor from model for selected cities" height="192" width="458"/>
 
 ## 3.0 Description of Data
 
@@ -145,8 +121,8 @@ ZAPMOVEIS webscrape data
 | zap_price_pmo  |    obj    |         N          | Brazilian reals per month rent, formatted.                  | Previously the `price` column.                                 |
 | zap_price_cls  |    obj    |         N          | Brazilan reals for housing class (e.g. condominio).         | Previously the `price-item-0` column.                          |
 | zap_price_iptu |    obj    |         N          | Brazilian reals excise tax / "IPTU".                        | Previously the `price-item-0` column.                          |
-| latitude       |   float   |         N          | Geoloc: latitude.                                           | Latitude geocode from Nominatim (Open Search API) on address.  |
-| longitude      |   float   |         N          | Geoloc: longitude.                                          | Longitude geocode from Nominatim (Open Search API) on address. |
+| latitude       |   float   |         N          | Geoloc: latitude.                                           | Latitude geocode from webservices API on address.  |
+| longitude      |   float   |         N          | Geoloc: longitude.                                          | Longitude geocode from webservices API on address. |
 | street         |    obj    |         N          | Split of address, first part.                               |                                                                |
 | neighborhood   |    obj    |         N          | Split of address, 2nd part.                                 |                                                                |
 | r$_pmo         |   float   |         N          | Brazilian reals per mo value extracted from `price` column. |                                                                |
@@ -162,10 +138,10 @@ magicbricks webscrape data
 | tenants preferred |    obj    |         Y          | Values: Bachelors\|Family\| Bachelors/Family       |                                                                              |
 | bathrooms         |   float   |         Y          | # Baths                                            |                                                                              |
 | availability      |    obj    |         Y          | Availability of the property for rent              | 'Immediate' or a relative near-future date.                                  |
-| latitude          |   float   |         Y          | Geoloc: latitude                                   | Geocode from Nominatim (Open Search API) on title, address when unavailable. |
-| longitude         |   float   |         Y          | Geoloc: longitude                                  | Geocode from Nominatim (Open Search API) on title, address when unavailable. |
+| latitude          |   float   |         Y          | Geoloc: latitude                                   | Geocode from webservices API on title, address when unavailable. |
+| longitude         |   float   |         Y          | Geoloc: longitude                                  | Geocode from webservices API on title, address when unavailable. |
 | balcony           |   float   |         Y          | # Balconies                                        |                                                                              |
-| floor             |    obj    |         Y          | Property layout includes x or y floors.            |                                                                              |
+| floor             |    obj    |         Y          | Property layout includes x of y floors.            |                                                                              |
 | facing            |    obj    |         Y          | Property facing direction.                         |                                                                              |
 | overlooking       |    obj    |         Y          | Property overlooks/has access to feature.          |                                                                              |
 | car parking       |    obj    |         Y          | Parking for Property tenent.                       |                                                                              |
