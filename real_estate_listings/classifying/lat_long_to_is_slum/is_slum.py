@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[28]:
 
 
 from PIL import Image, ImageColor, ImageOps, ImageFilter
@@ -37,7 +37,7 @@ for name in os.listdir('Slum Maps/grayscale'):
     maps[f"{name.split('_')[0]}_grayscale"] = image
 
 
-# In[6]:
+# In[32]:
 
 
 # defining a distance function
@@ -79,6 +79,8 @@ rio_x_factor = rio_x_dist_lat_long / rio_x_dist_coords
 # getting conversion between y distance in pixels to km
 rio_y_factor = -rio_y_dist_lat_long / rio_y_dist_coords
 
+rio_total_factor = rio_total_dist_lat_long/rio_total_dist_coords
+
 
 # In[7]:
 
@@ -100,7 +102,7 @@ def rio_get_lat_long(coord):
 # (556,304) (266, 744)
 
 
-# In[9]:
+# In[33]:
 
 
 # top left
@@ -138,6 +140,8 @@ mumbai_x_factor = mumbai_x_dist_lat_long / mumbai_x_dist_coords
 # getting conversion between y distance in pixels to km
 mumbai_y_factor = -mumbai_y_dist_lat_long / mumbai_y_dist_coords
 
+mumbai_total_factor = mumbai_total_dist_lat_long/mumbai_total_dist_coords
+
 
 # In[10]:
 
@@ -153,7 +157,7 @@ def mumbai_get_lat_long(coord):
     return (lat, long)
 
 
-# In[11]:
+# In[34]:
 
 
 # top left
@@ -190,6 +194,8 @@ hyderabad_x_factor = hyderabad_x_dist_lat_long / hyderabad_x_dist_coords
 # getting conversion between y distance in pixels to km
 hyderabad_y_factor = -hyderabad_y_dist_lat_long / hyderabad_y_dist_coords
 
+hyderabad_total_factor = hyderabad_total_dist_lat_long/hyderabad_total_dist_coords
+
 
 # In[12]:
 
@@ -205,7 +211,7 @@ def hyderabad_get_lat_long(coord):
     return (lat, long)
 
 
-# In[19]:
+# In[35]:
 
 
 # top left
@@ -242,14 +248,16 @@ chennai_x_factor = chennai_x_dist_lat_long / chennai_x_dist_coords
 # getting conversion between y distance in pixels to km
 chennai_y_factor = -chennai_y_dist_lat_long / chennai_y_dist_coords
 
+chennai_total_factor = chennai_total_dist_lat_long/chennai_total_dist_coords
 
-# In[20]:
+
+# In[119]:
 
 
 def chennai_get_lat_long(coord):
     
-    y = coord[1] * hyperbad_y_factor
-    x = coord[0] * hyperbad_x_factor
+    y = coord[1] * chennai_y_factor
+    x = coord[0] * chennai_x_factor
     
     lat  = chennai_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
     long = chennai_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(chennai_origin_lat_long[0] * pi/180)
@@ -257,7 +265,7 @@ def chennai_get_lat_long(coord):
     return (lat, long)
 
 
-# In[21]:
+# In[36]:
 
 
 # top left
@@ -273,38 +281,40 @@ def chennai_get_lat_long(coord):
 
 
 # lattitude and Longitude reference points
-dehli_origin_lat_long = (28.93813056, 76.76611111)
-dehli_edge_lat_long = (28.41324167, 77.58750000)
+delhi_origin_lat_long = (28.93813056, 76.76611111)
+delhi_edge_lat_long = (28.41324167, 77.58750000)
 # Pixel coordinate refrence points
-dehli_origin_coords = (0, 0)
-dehli_edge_coords = (745, 1074)
+delhi_origin_coords = (0, 0)
+delhi_edge_coords = (745, 1074)
 
 # getting real world component and total distances between refrence points
-dehli_total_dist_lat_long = geodesic(dehli_origin_lat_long, dehli_edge_lat_long).kilometers
-dehli_y_dist_lat_long = geodesic(dehli_origin_lat_long, (dehli_edge_lat_long[0],dehli_origin_lat_long[1])).kilometers
-dehli_x_dist_lat_long = geodesic(dehli_origin_lat_long, (dehli_origin_lat_long[0], dehli_edge_lat_long[1])).kilometers
+delhi_total_dist_lat_long = geodesic(delhi_origin_lat_long, delhi_edge_lat_long).kilometers
+delhi_y_dist_lat_long = geodesic(delhi_origin_lat_long, (delhi_edge_lat_long[0],delhi_origin_lat_long[1])).kilometers
+delhi_x_dist_lat_long = geodesic(delhi_origin_lat_long, (delhi_origin_lat_long[0], delhi_edge_lat_long[1])).kilometers
 
 # getting pixel coordinate component and total distances between refrence points
-dehli_total_dist_coords = distance(dehli_origin_coords,dehli_edge_coords)
-dehli_y_dist_coords = distance(dehli_origin_coords, (dehli_edge_coords[0], dehli_origin_coords[1]))
-dehli_x_dist_coords = distance(dehli_origin_coords, (dehli_origin_coords[0], dehli_edge_coords[1]))
+delhi_total_dist_coords = distance(delhi_origin_coords,delhi_edge_coords)
+delhi_y_dist_coords = distance(delhi_origin_coords, (delhi_edge_coords[0], delhi_origin_coords[1]))
+delhi_x_dist_coords = distance(delhi_origin_coords, (delhi_origin_coords[0], delhi_edge_coords[1]))
 
 # getting conversion between x distance in pixels to km
-dehli_x_factor = dehli_x_dist_lat_long / dehli_x_dist_coords
+delhi_x_factor = delhi_x_dist_lat_long / delhi_x_dist_coords
 # getting conversion between y distance in pixels to km
-dehli_y_factor = -dehli_y_dist_lat_long / dehli_y_dist_coords
+delhi_y_factor = -delhi_y_dist_lat_long / delhi_y_dist_coords
+
+delhi_total_factor = delhi_total_dist_lat_long/delhi_total_dist_coords
 
 
 # In[22]:
 
 
-def dehli_get_lat_long(coord):
+def delhi_get_lat_long(coord):
     
-    y = coord[1] * hyperbad_y_factor
-    x = coord[0] * hyperbad_x_factor
+    y = coord[1] * delhi_y_factor
+    x = coord[0] * delhi_x_factor
     
-    lat  = dehli_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
-    long = dehli_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(dehli_origin_lat_long[0] * pi/180)
+    lat  = delhi_origin_lat_long[0] + (y / EARTH_RADIUS) * (180 / pi)
+    long = delhi_origin_lat_long[1] + (x / EARTH_RADIUS) * (180 / pi) / cos(delhi_origin_lat_long[0] * pi/180)
 
     return (lat, long)
 
@@ -458,8 +468,127 @@ def get_slum_val(city, coord):
             return 1
 
 
-# In[ ]:
+# In[112]:
 
 
+def check_suroundings(pixel_coords, image, search_range):
+    
+    points = []
+    found = False
+    for i in range(search_range):
+        
+        if np.array(image)[pixel_coords[1]+i, pixel_coords[0]][0] != 255:
+            
+            points.append([pixel_coords[1]+i, pixel_coords[0]])
+            
+            found = True
+            
+        elif np.array(image)[pixel_coords[1], pixel_coords[0]+i][0] != 255:
+            
+            points.append([pixel_coords[1], pixel_coords[0]+i])
+                    
+            found = True
+            
+        elif np.array(image)[pixel_coords[1]+i, pixel_coords[0]+i][0] != 255:
+            
+            points.append([pixel_coords[1]+i, pixel_coords[0]+i])
+                        
+            found = True
+            
+        elif np.array(image)[pixel_coords[1]-i, pixel_coords[0]][0] != 255:
+            
+            points.append([pixel_coords[1]-i, pixel_coords[0]])
+                        
+            found = True
+            
+        elif np.array(image)[pixel_coords[1], pixel_coords[0]-i][0] != 255:
+            
+            points.append([pixel_coords[1], pixel_coords[0]-i])
+                        
+            found = True
+            
+        elif np.array(image)[pixel_coords[1]-i, pixel_coords[0]-i][0] != 255:
+            
+            points.append([pixel_coords[1]-i, pixel_coords[0]-i])
+                        
+            found = True
+            
+        elif np.array(image)[pixel_coords[1]-i, pixel_coords[0]+i][0] != 255:
+            
+            points.append([pixel_coords[1]-i, pixel_coords[0]+i])
+                        
+            found = True
+            
+        elif np.array(image)[pixel_coords[1]+i, pixel_coords[0]-i][0] != 255:
+            
+            points.append([pixel_coords[1]+i, pixel_coords[0]-i])
+                   
+            found = True
+        else:
+            pass
+        
+        if found == True:
+            
+            
+            if image == maps['rio_grayscale']:
+                
+                vecs = [(distance(pixel_coords, val) * rio_total_factor, ((pixel_coords[0] - val[0])*rio_x_factor, (pixel_coords[1] - val[1]) * rio_y_factor)) for val in points]
+                
+            elif image == maps['mumbai_grayscale']:
+                
+                vecs = [(distance(pixel_coords, val) * mumbai_total_factor, ((pixel_coords[0] - val[0])*mumbai_x_factor, (pixel_coords[1] - val[1]) * mumbai_y_factor)) for val in points]
+                
+            elif image == maps['hyderabad_grayscale']:
+                
+                vecs = [(distance(pixel_coords, val) * hyderabad_total_factor, ((pixel_coords[0] - val[0])*hyderabad_x_factor, (pixel_coords[1] - val[1]) * hyderabad_y_factor)) for val in points]
+                
+            elif image == maps['chennai_grayscale']:
+                
+                vecs = [(distance(pixel_coords, val) * chennai_total_factor, ((pixel_coords[0] - val[0])*chennai_x_factor, (pixel_coords[1] - val[1]) * chennai_y_factor)) for val in points]
+                
+            elif image == maps['delhi_grayscale']:
+                
+                vecs = [(distance(pixel_coords, val) * delhi_total_factor, ((pixel_coords[0] - val[0])*delhi_x_factor, (pixel_coords[1] - val[1]) * delhi_y_factor)) for val in points]
+        
+            return vecs
 
+
+# In[117]:
+
+
+def get_distance_from_slum(city, coord):
+    
+    pixel_coords = get_pixel_coords(city=city, coord=coord)
+    search_range = 1000
+    if city == 'rio':
+    
+        if np.array(maps['rio_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
+            return 0
+        else:
+            return check_suroundings(pixel_coords, maps['rio_grayscale'], search_range)
+        
+    elif city == 'mumbai':
+                                               
+        if np.array(maps['mumbai_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
+            return 0
+        else:
+            return check_suroundings(pixel_coords, maps['mumbai_grayscale'], search_range)
+    elif city == 'hyderabad':
+        
+        if np.array(maps['hyderabad_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
+            return 0
+        else:
+            return check_suroundings(pixel_coords, maps['hyderabad_grayscale'], search_range)
+    elif city == 'chennai':
+        
+        if np.array(maps['chennai_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
+            return 0
+        else:
+            return check_suroundings(pixel_coords, maps['chennai_grayscale'], search_range)
+    elif city == 'dehli':
+        
+        if np.array(maps['delhi_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
+            return 0
+        else:
+            return check_suroundings(pixel_coords, maps['delhi_grayscale'], search_range)
 
