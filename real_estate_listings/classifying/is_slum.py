@@ -403,13 +403,13 @@ def get_pixel_coords(city, coord):
             y = chennai_edge_coords[0]-1
         
         return (x,y)
-    elif city == 'dehli':
+    elif city == 'delhi':
         
-        y = (coord[0] - dehli_origin_lat_long[0]) / (180 / pi) * EARTH_RADIUS 
-        x = (coord[1] -  dehli_origin_lat_long[1]) * cos(dehli_origin_lat_long[0] * pi/180) / (180 / pi) * EARTH_RADIUS
+        y = (coord[0] - delhi_origin_lat_long[0]) / (180 / pi) * EARTH_RADIUS 
+        x = (coord[1] -  delhi_origin_lat_long[1]) * cos(delhi_origin_lat_long[0] * pi/180) / (180 / pi) * EARTH_RADIUS
         
-        x = int(np.round(x / dehli_x_factor))
-        y = int(np.round(y / dehli_y_factor))
+        x = int(np.round(x / delhi_x_factor))
+        y = int(np.round(y / delhi_y_factor))
         
         if x < 0:
             x = 0
@@ -417,15 +417,15 @@ def get_pixel_coords(city, coord):
             y = 0
         
         
-        if x > dehli_edge_coords[1]-1:
-            x = dehli_edge_coords[1]-1
-        if y > dehli_edge_coords[0]-1:
-            y = dehli_edge_coords[0]-1
+        if x > delhi_edge_coords[1]-1:
+            x = delhi_edge_coords[1]-1
+        if y > delhi_edge_coords[0]-1:
+            y = delhi_edge_coords[0]-1
         
         return (x,y)
         
     else:
-        print("Error Invalid City, Valid Cities are rio, mumbai")
+        print("Error Invalid City, Valid Cities are rio, mumbai, delhi, chennai, and hyderabad")
 
 
 # In[26]:
@@ -460,7 +460,7 @@ def get_slum_val(city, coord):
             return 0
         else:
             return 1
-    elif city == 'dehli':
+    elif city == 'delhi':
         
         if np.array(maps['delhi_grayscale'])[pixel_coords[1], pixel_coords[0]][0] == 255:
             return 0
@@ -472,7 +472,6 @@ def get_slum_val(city, coord):
 
 
 def check_suroundings(pixel_coords, image, search_range):
-    
     points = []
     found = False
     for i in range(search_range):
@@ -556,10 +555,10 @@ def check_suroundings(pixel_coords, image, search_range):
 # In[117]:
 
 
-def get_distance_from_slum(city, coord):
+def get_distance_from_slum(city, coord, search_range):
     
     pixel_coords = get_pixel_coords(city=city, coord=coord)
-    search_range = 1000
+    search_range = search_range
     if city == 'rio':
     
         if np.array(maps['rio_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
@@ -585,7 +584,7 @@ def get_distance_from_slum(city, coord):
             return 0
         else:
             return check_suroundings(pixel_coords, maps['chennai_grayscale'], search_range)
-    elif city == 'dehli':
+    elif city == 'delhi':
         
         if np.array(maps['delhi_grayscale'])[pixel_coords[1], pixel_coords[0]][0] != 255:
             return 0
